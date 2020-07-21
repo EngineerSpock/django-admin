@@ -9,7 +9,7 @@ class Member(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    avatar = models.ImageField(upload_to='photos/', blank=True)  # blank influences on Admin validation - need migration
+    avatar = models.ImageField(upload_to='photos/', blank=True)
 
     department = models.TextField(null=True, blank=True)
 
