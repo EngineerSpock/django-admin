@@ -1,0 +1,8 @@
+asgiref==3.2.7
+Django==3.0.7
+django-debug-toolbar==2.2
+django-extensions==3.0.2
+Pillow==7.1.2
+pytz==2020.1
+six==1.15.0
+sqlparse==0.3.1
