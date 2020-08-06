@@ -2,10 +2,12 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib.auth.models import Group
+from django.urls import path
 
 from django.utils.safestring import mark_safe
 
 from ToDoDashboard.models import Member, Dashboard, DashboardColumn, ToDoItem
+from ToDoDashboard.views import DashboardListView, DashboardDetailView, TodoItemUpdate
 from users.models import User
 
 
@@ -14,7 +16,9 @@ class MyAdminSite(admin.AdminSite):
     def get_urls(self):
         urlpatterns = super().get_urls()
         urlpatterns += [
-            # add later
+            path('kanban/', DashboardListView.as_view(), name='kanban'),
+            path('kanban/dashboard-<int:pk>/', DashboardDetailView.as_view(), name='dashboard'),
+            path('kanban/todo/update/<int:pk>/', TodoItemUpdate.as_view(), name='update_todo'),
         ]
         return urlpatterns
 

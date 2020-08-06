@@ -1,0 +1,49 @@
+{% extends 'admin/base_site.html' %}
+
+{% load static reversing %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="dashboard__add-column submit-row">
+        <a href="{% admin_reverse 'dashboardcolumn' 'add' dashboard=object.pk %}" class="addlink">Add new column</a>
+    </div>
+    <div class="dashboard">
+        <div class="dashboard__wrapper">
+            {% for column in object.dashboardcolumn_set.all %}
+                <div class="dashboard__column">
+                    <div class="dashboard__column-wrapper">
+                        <div class="dashboard__column-title">{{ column.title }}<a href="{% admin_reverse 'dashboardcolumn' 'change' column.pk dashboard=object.pk %}" class="changelink">Change</a><a href="{% admin_reverse 'dashboardcolumn' 'delete' column.pk dashboard=object.pk %}" class="deletelink">Delete</a></div>
+                        <div class="dashboard__task-area" id="column-{{ column.pk }}">
+                            {% for todo_item in column.todoitem_set.all %}
+                                <div class="dashboard__task-item"id="drag-{{ todo_item.pk }}">
+                                    <form action="" method="post" id="todo-{{ todo_item.pk }}" class="task-form">
+                                        <div class="dashboard__task-title">{{ todo_item.label }}</div>
+                                        <div class="dashboard__task-description">{{ todo_item.description|safe }}</div>
+                                        <div class="form-data" style="display: none;">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="dashboard_column">
+                                        </div>
+                                    </form>
+
+                                    <a href="{% admin_reverse 'todoitem' 'change' todo_item.pk dashboard_column=column.pk %}" class="changelink">Change</a>
+                                    <a href="{% admin_reverse 'todoitem' 'delete' todo_item.pk dashboard_column=column.pk %}" class="deletelink">Delete</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="dashboard__footer">
+                            <a href="{% admin_reverse 'todoitem' 'add' dashboard_column=column.pk %}" class="default">Add new task</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+    <script src="{% static 'js/drag-n-drop.min.js' %}"></script>
+{% endblock %}
