@@ -30,7 +30,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'ToDoDashboard.apps.ToDoDashboardConfig',
-    'django.contrib.admin',
+    'ToDoDashboard.apps.MyAdminConfig',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -123,3 +124,6 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, os.getenv('STATIC_PATH', 'static'))
 INTERNAL_IPS = ('127.0.0.1',)
 AUTH_USER_MODEL = 'users.User'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'ToDoDashboard', 'static'),
+)

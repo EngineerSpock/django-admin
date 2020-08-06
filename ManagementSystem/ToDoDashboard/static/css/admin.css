@@ -1,0 +1,7 @@
+#header {
+    background: #00897b
+}
+
+#branding h1, #branding h1 a:link, #branding h1 a:visited {
+    color: white;
+}

@@ -1,12 +1,25 @@
 from django.contrib import admin
 
 # Register your models here.
+from django.contrib.auth.models import Group
 
-from django.contrib.auth.admin import UserAdmin
 from django.utils.safestring import mark_safe
 
 from ToDoDashboard.models import Member, Dashboard, DashboardColumn, ToDoItem
 from users.models import User
+
+
+class MyAdminSite(admin.AdminSite):
+
+    def get_urls(self):
+        urlpatterns = super().get_urls()
+        urlpatterns += [
+            # add later
+        ]
+        return urlpatterns
+
+
+admin.site = MyAdminSite()
 
 
 class ColumnInline(admin.StackedInline):
@@ -133,8 +146,9 @@ class ToDoItemAdmin(admin.ModelAdmin):
 
     actions_on_bottom = True
 
-
+from django.contrib.auth.admin import UserAdmin, GroupAdmin
 admin.site.register(User, UserAdmin)
+admin.site.register(Group, GroupAdmin)
 
 admin.site.register(Member, MemberAdmin)
 admin.site.register(Dashboard, DashboardAdmin)
