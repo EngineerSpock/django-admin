@@ -8,7 +8,7 @@ register = template.Library()
 
 @register.simple_tag()
 def admin_reverse(model, action, pk=None, **kwargs):
-    reverse_str = f'admin:ToDoDashboard_{model}_{action}'
+    reverse_str = f'admin:tododashboard_{model}_{action}'
     if pk:
         url = reverse(reverse_str, args=[pk])
     else:

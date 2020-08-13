@@ -13,6 +13,20 @@ def index(request):
 
 
 class DashboardListView(ListView):
+    """
+    Displays a list of available Dashboards.
+
+    **Context**
+    Dashboards are represented by the :model:`ToDoDashboard.Dashboard`
+
+    ``ordering``
+        Defines the ordering of Dashboards.
+
+    **Template:**
+
+    :template:`ToDoDashboard/kanban.html`
+    """
+
     model = Dashboard
     template_name = 'kanban.html'
     ordering = 'title'
@@ -25,6 +39,20 @@ class DashboardListView(ListView):
 
 
 class DashboardDetailView(DetailView, admin.ModelAdmin):
+    """
+    Displays ToDo items by columns.
+
+    **Context**
+    ToDo Items are represented by the :model:`ToDoDashboard.ToDoItem`
+    Columns are represented by the :model:`ToDoDashboard.DashboardColumn`
+
+    ``get_context_data``
+        Setting title, has_permission and task_form.
+
+    **Template:**
+
+    :template:`ToDoDashboard/dashboard.html`
+    """
     model = Dashboard
     template_name = 'dashboard.html'
 

@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('ToDoDashboard', '0001_initial'),
+        ('tododashboard', '0001_initial'),
         ('users', '0001_initial'),
     ]
 
@@ -37,8 +37,8 @@ class Migration(migrations.Migration):
                 ('comment', models.TextField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('dashboard_column', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ToDoDashboard.DashboardColumn')),
-                ('subtask_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='ToDoDashboard.ToDoItem')),
+                ('dashboard_column', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tododashboard.DashboardColumn')),
+                ('subtask_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='tododashboard.ToDoItem')),
             ],
             options={
                 'verbose_name': 'ToDo Item',
@@ -49,11 +49,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='dashboardcolumn',
             name='dashboard',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='ToDoDashboard.Dashboard'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='tododashboard.Dashboard'),
         ),
         migrations.AddField(
             model_name='dashboard',
             name='owner',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='member', to='ToDoDashboard.Member'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='member', to='tododashboard.Member'),
         ),
     ]

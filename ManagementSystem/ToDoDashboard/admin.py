@@ -6,6 +6,7 @@ from django.urls import path
 
 from django.utils.safestring import mark_safe
 
+from ToDoDashboard.forms import ToDoItemForm
 from ToDoDashboard.models import Member, Dashboard, DashboardColumn, ToDoItem
 from ToDoDashboard.views import DashboardListView, DashboardDetailView, TodoItemUpdate
 from users.models import User
@@ -112,6 +113,7 @@ class ToDoItemFilter(admin.SimpleListFilter):
 
 
 class ToDoItemAdmin(admin.ModelAdmin):
+    form = ToDoItemForm
 
     def add_one_hour_to_estimated_time(self, request, queryset):
         for rec in queryset:

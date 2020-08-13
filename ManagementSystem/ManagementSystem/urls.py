@@ -21,6 +21,7 @@ from django.urls import path, include, re_path
 from ManagementSystem import settings
 
 urlpatterns = [
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('', include('ToDoDashboard.urls')),
     re_path(r'^__debug__', include(debug_toolbar.urls))

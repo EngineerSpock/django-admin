@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from ManagementSystem.settings import AUTH_USER_MODEL
@@ -44,9 +45,22 @@ class DashboardColumn(models.Model):
 
 
 class ToDoItem(models.Model):
+    """
+    Represents a task assigned to a :model:`ToDoDashboard.Member`.
+    Each task is attached to a :model:`ToDoDashboard.DashboardColumn`.
+    """
     class Meta:
         verbose_name = 'ToDo Item'
         verbose_name_plural = 'ToDo Items'
+
+    def clean(self):
+        """
+        Verifies that start_date goes behind due_date.
+        :return: Raises ValidationError in case of a verification failure.
+        """
+        if self.start_date and self.due_date:
+            if self.start_date > self.due_date:
+                raise ValidationError('Dates are incorrect')
 
     dashboard_column = models.ForeignKey(DashboardColumn, on_delete=models.CASCADE)
 

@@ -89,7 +89,7 @@ def load_data(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('ToDoDashboard', '0002_auto_20200715_1229'),
+        ('tododashboard', '0002_auto_20200715_1229'),
     ]
     operations = [
         migrations.RunPython(load_data)

@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ToDoDashboard', '0003_add_initial_data'),
+        ('tododashboard', '0003_add_initial_data'),
     ]
 
     operations = [
